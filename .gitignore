@@ -1,0 +1,21 @@
+# Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+
+channel-service/venv/
+channel-service/__pycache__/
+channel-service/*.pyc
+
+# Environment variables
+backend/.env
+
+# Node
+frontend/node_modules/
+
+# Build files
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db

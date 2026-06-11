@@ -35,7 +35,7 @@ function App() {
     try {
 
       await axios.post(
-        "http://127.0.0.1:8000/customers/",
+        "https://xeno-backend-uqlu.onrender.com/customers/",
         {
           ...customerForm,
           total_spent: Number(customerForm.total_spent),
@@ -63,7 +63,7 @@ function App() {
   const generateSegment = async () => {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/segment/",
+      "https://xeno-backend-uqlu.onrender.com/segment/",
       {
         prompt: segmentPrompt
       }
@@ -75,7 +75,7 @@ function App() {
   const generateMessage = async () => {
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/campaigns/generate-message",
+      "https://xeno-backend-uqlu.onrender.com/campaigns/generate-message",
       {
         prompt: campaignPrompt
       }
@@ -92,7 +92,7 @@ function App() {
     }
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/campaigns/send",
+      "https://xeno-backend-uqlu.onrender.com/campaigns/send",
       {
         customer_id: selectedCustomer.id,
         message: campaignMessage
@@ -107,11 +107,11 @@ function App() {
   const loadAnalytics = async () => {
 
   const customersResponse = await axios.get(
-    "http://127.0.0.1:8000/customers/"
+    "https://xeno-backend-uqlu.onrender.com/customers/"
   );
 
   const receiptsResponse = await axios.get(
-    "http://127.0.0.1:8000/campaigns/delivery-receipts"
+    "https://xeno-backend-uqlu.onrender.com/campaigns/delivery-receipts"
   );
 
   const receipts = receiptsResponse.data;

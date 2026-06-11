@@ -31,7 +31,7 @@ def send_campaign(data: dict):
     message = data["message"]
 
     response = requests.post(
-        "http://127.0.0.1:8001/send",
+        "https://xeno-channel-service-dsev.onrender.com/send",
         json={
             "customer_id": customer_id,
             "message": message

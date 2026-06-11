@@ -25,12 +25,16 @@ def segment_customers(data: dict):
 
     db: Session = SessionLocal()
 
-    customers = db.query(Customer).filter(
-        Customer.total_spent >= filters["min_spent"],
-        Customer.last_order_days_ago >= filters["inactive_days"]
-    ).all()
+    try:
+        customers = db.query(Customer).filter(
+            Customer.total_spent >= filters["min_spent"],
+            Customer.last_order_days_ago >= filters["inactive_days"]
+        ).all()
 
-    return {
-        "filters": filters,
-        "matching_customers": customers
-    }
+        return {
+            "filters": filters,
+            "matching_customers": customers
+        }
+
+    finally:
+        db.close()

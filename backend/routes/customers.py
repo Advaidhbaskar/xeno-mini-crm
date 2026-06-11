@@ -15,22 +15,26 @@ def create_customer(customer: CustomerCreate):
 
     db: Session = SessionLocal()
 
-    new_customer = Customer(
-        name=customer.name,
-        email=customer.email,
-        city=customer.city,
-        total_spent=customer.total_spent,
-        last_order_days_ago=customer.last_order_days_ago
-    )
+    try:
+        new_customer = Customer(
+            name=customer.name,
+            email=customer.email,
+            city=customer.city,
+            total_spent=customer.total_spent,
+            last_order_days_ago=customer.last_order_days_ago
+        )
 
-    db.add(new_customer)
-    db.commit()
-    db.refresh(new_customer)
+        db.add(new_customer)
+        db.commit()
+        db.refresh(new_customer)
 
-    return {
-        "message": "Customer created successfully",
-        "customer_id": new_customer.id
-    }
+        return {
+            "message": "Customer created successfully",
+            "customer_id": new_customer.id
+        }
+
+    finally:
+        db.close()
 
 
 @router.get("/")
@@ -38,6 +42,9 @@ def get_customers():
 
     db: Session = SessionLocal()
 
-    customers = db.query(Customer).all()
+    try:
+        customers = db.query(Customer).all()
+        return customers
 
-    return customers
+    finally:
+        db.close()

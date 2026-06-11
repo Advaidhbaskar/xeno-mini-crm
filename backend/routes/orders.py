@@ -15,22 +15,26 @@ def create_order(order: OrderCreate):
 
     db: Session = SessionLocal()
 
-    new_order = Order(
-        customer_id=order.customer_id,
-        amount=order.amount,
-        category=order.category
-    )
+    try:
+        new_order = Order(
+            customer_id=order.customer_id,
+            amount=order.amount,
+            category=order.category
+        )
 
-    db.add(new_order)
+        db.add(new_order)
 
-    db.commit()
+        db.commit()
 
-    db.refresh(new_order)
+        db.refresh(new_order)
 
-    return {
-        "message": "Order created successfully",
-        "order_id": new_order.id
-    }
+        return {
+            "message": "Order created successfully",
+            "order_id": new_order.id
+        }
+
+    finally:
+        db.close()
 
 
 @router.get("/")
@@ -38,6 +42,9 @@ def get_orders():
 
     db: Session = SessionLocal()
 
-    orders = db.query(Order).all()
+    try:
+        orders = db.query(Order).all()
+        return orders
 
-    return orders
+    finally:
+        db.close()

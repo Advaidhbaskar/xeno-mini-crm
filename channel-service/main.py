@@ -23,7 +23,7 @@ def send_campaign(data: dict):
 
     try:
         requests.post(
-            "http://127.0.0.1:8000/campaigns/delivery-receipt",
+            "https://xeno-backend-uqlu.onrender.com/campaigns/delivery-receipt",
             json=callback_data
         )
     except:
